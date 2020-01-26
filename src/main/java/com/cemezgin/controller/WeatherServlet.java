@@ -1,6 +1,5 @@
 package com.cemezgin.controller;
 
-import com.cemezgin.model.City;
 import com.cemezgin.service.HttpService;
 import com.cemezgin.service.WeatherService;
 
@@ -22,13 +21,22 @@ public class WeatherServlet extends javax.servlet.http.HttpServlet {
     }
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-           String countryCode = request.getParameter("countryCode");
-           String weather = null;
+        String countryCode = request.getParameter("countryCode");
+        String isXml = request.getParameter("xml") != null ? request.getParameter("xml") : "0";
+        String weather = null;
 
-           if (countryCode != null) {
-               weather = this.weatherService.getWeather(countryCode);
-           }
+        if (countryCode != null) {
+            if (isXml.equals("1")) {
+                weather = this.weatherService.getWeather(countryCode, WeatherService.XML);
+            } else {
+                weather = this.weatherService.getWeather(countryCode, WeatherService.JSON);
+            }
+        }
 
-           this.httpService.getJsonResponse(response, weather);
+        if (isXml.equals("1")) {
+            this.httpService.getXmlResponse(response, weather);
+        } else {
+            this.httpService.getJsonResponse(response, weather);
+        }
     }
 }
