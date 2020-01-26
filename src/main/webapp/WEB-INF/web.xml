@@ -4,4 +4,12 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+    <servlet>
+        <servlet-name>WeatherServlet</servlet-name>
+        <servlet-class>com.cemezgin.controller.WeatherServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WeatherServlet</servlet-name>
+        <url-pattern>/cities/weathers</url-pattern>
+    </servlet-mapping>
 </web-app>
