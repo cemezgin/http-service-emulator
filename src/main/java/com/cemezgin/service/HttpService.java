@@ -1,9 +1,8 @@
 package com.cemezgin.service;
 
-import com.google.gson.Gson;
-
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class HttpService {
     private static final String CONTENT_TYPE_JSON = "application/json";
@@ -27,9 +26,11 @@ public class HttpService {
         out.close();
     }
 
-
-    private String parseToJson(String str) {
-        Gson g = new Gson();
-        return g.toJson(str);
+    public String extractPostRequestBody(javax.servlet.http.HttpServletRequest request) throws IOException {
+        if ("POST".equalsIgnoreCase(request.getMethod())) {
+            Scanner s = new Scanner(request.getInputStream(), "UTF-8").useDelimiter("\\A");
+            return s.hasNext() ? s.next() : "";
+        }
+        return "";
     }
 }
