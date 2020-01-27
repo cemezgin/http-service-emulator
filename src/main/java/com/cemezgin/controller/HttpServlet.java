@@ -23,6 +23,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         String requestBody = this.httpService.extractPostRequestBody(request);
+        this.httpService.logRequestToConsole("POST " + request.getRequestURL() + "\nBody:\n" + requestBody);
 
         Gson gson = new Gson();
         City city = gson.fromJson(requestBody, City.class);
@@ -48,6 +49,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
     }
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+        this.httpService.logRequestToConsole("GET " + request.getRequestURL());
         String countryCode = request.getParameter("countryCode");
         String isXml = request.getParameter("xml") != null ? request.getParameter("xml") : "0";
         String weather = null;

@@ -13,6 +13,7 @@ public class HttpService {
         response.setContentType(CONTENT_TYPE_JSON);
         response.setCharacterEncoding("UTF-8");
         out.println(parameter);
+        this.logResponseToConsole(parameter);
         out.flush();
         out.close();
     }
@@ -22,6 +23,7 @@ public class HttpService {
         response.setContentType(CONTENT_TYPE_XML);
         response.setCharacterEncoding("UTF-8");
         out.println(parameter);
+        this.logResponseToConsole(parameter);
         out.flush();
         out.close();
     }
@@ -32,5 +34,15 @@ public class HttpService {
             return s.hasNext() ? s.next() : "";
         }
         return "";
+    }
+
+    private void logResponseToConsole(String response)
+    {
+        System.out.println("Response: " + response);
+    }
+
+    public void logRequestToConsole(String request)
+    {
+        System.out.println("Request: " + request);
     }
 }
