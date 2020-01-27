@@ -23,7 +23,7 @@ public class HttpServlet extends javax.servlet.http.HttpServlet {
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         String requestBody = this.httpService.extractPostRequestBody(request);
-        this.httpService.logRequestToConsole("POST " + request.getRequestURL() + "\nBody:\n" + requestBody);
+        this.httpService.logRequestToConsole("POST " + request.getRequestURL() + "\nBody: " + requestBody);
 
         Gson gson = new Gson();
         City city = gson.fromJson(requestBody, City.class);
